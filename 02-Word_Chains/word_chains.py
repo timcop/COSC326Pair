@@ -38,3 +38,4 @@ for i, v in enumerate(dictionary):
                 adj[i][j] = 1
                 adj[j][i] = 1
 print(adj)
+
