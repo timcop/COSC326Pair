@@ -4,11 +4,18 @@ egg elm
 get gem 3
 boy toy
 till mill
+cap cat 6
+cap cat
 
 hat
 hit
 hot
+hap
 hop
+cop
+cap
+lap
+cat
 try
 toy
 get

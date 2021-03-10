@@ -1,5 +1,11 @@
-from collections import defaultdict
+## Graph implementation has been taken from geeksforgeeks at:
+#  https://www.geeksforgeeks.org/generate-graph-using-dictionary-python/
+# Specifically addEdge, find_all_paths and find_shortest_path
 
+# NEEDS PYTHON3 TO RUN
+
+# Imports
+from collections import defaultdict
 import sys
 
 problems = [] # Problems array, store tuples (word1, word2, path) where path = 0 means no path specified
@@ -85,7 +91,7 @@ for prob in problems:
         path = find_shortest_path(graph, prob[0], prob[1])
         if path != None:
             for node in path:
-                print(node, end =" ")
+                print(node, end = ' ')
             print()
         else:
             print(prob[0] + " " + prob[1] + " " + "impossible")
@@ -98,7 +104,7 @@ for prob in problems:
             for i, path in enumerate(paths):
                 if len(path) == int(prob[2]):
                     for node in path:
-                        print(node, end=" ")
+                        print(node, end = ' ' )
                     print()
                     count = 1
                     break
