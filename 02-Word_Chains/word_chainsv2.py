@@ -80,6 +80,7 @@ for i, v in enumerate(words_arr):
 # else we want to find a path of a given length. If no path is found, we print the problem
 # and say "impossible"
 for prob in problems:
+    #print(prob)
     if prob[2] == 0:
         path = find_shortest_path(graph, prob[0], prob[1])
         if path != None:
@@ -93,10 +94,13 @@ for prob in problems:
         if paths == None:
             print(prob[0] + " " + prob[1] + " " + str(prob[2]) + " " + "impossible")
         else:
+            count = 0
             for i, path in enumerate(paths):
                 if len(path) == int(prob[2]):
                     for node in path:
                         print(node, end=" ")
                     print()
-                elif i == len(path)-1:
-                    print(prob[0] + " " + prob[1] + " " + str(prob[2]) + " " + "impossible")
+                    count = 1
+                    break
+            if count == 0:
+                print(prob[0] + " " + prob[1] + " " + str(prob[2]) + " " + "impossible")
