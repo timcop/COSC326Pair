@@ -15,25 +15,32 @@ from word2number import w2n
 
 problems = [] # Problems array, store tuples (word1, word2, path) where path = 0 means no path specified
 words_arr = [] # Array of words to be used for chains
+white_space = 0
 
 # Read in and interpret input from stdin
 for line in sys.stdin:
     if not (line.isspace()):
-        line_list = line.split()
-        if len(line_list) == 2: # no specified chain length
-            prob = (line_list[0], line_list[1], 0)
-            problems.append(prob)
-        elif len(line_list) == 3: # specified chain length
-            if isinstance(line_list[2], str): # if the number is a string
-                path = w2n.word_to_num(line_list[2])
-                prob = (line_list[0], line_list[1], path)
+        if white_space == 0:
+            line_list = line.split()
+            if len(line_list) == 2: # no specified chain length
+                prob = (line_list[0], line_list[1], 0)
                 problems.append(prob)
-            else:
-                prob = (line_list[0], line_list[1], line_list[2])
-                problems.append(prob)
-        else: # everything else eg one line input
+            elif len(line_list) == 3: # specified chain length
+                if isinstance(line_list[2], str): # if the number is a string
+                    path = w2n.word_to_num(line_list[2])
+                    prob = (line_list[0], line_list[1], path)
+                    problems.append(prob)
+                else:
+                    prob = (line_list[0], line_list[1], line_list[2])
+                    problems.append(prob)
+            else: # everything else eg one line input
+                problems.append(line)
+        else:
             word = line.strip().lower()
             words_arr.append(word)
+    else:
+        white_space += 1
+
 
 graph = defaultdict(list) # Create a graph
 
