@@ -1,22 +1,15 @@
 hat hop 4
 try toy
+mill
 egg elm
 get gem 3
-boy toy
-till mill
-cap cat 6
-cap cat
+boy toy 3
+boy toy three
 
 hat
 hit
 hot
-hap
 hop
-cop
-cap
-lap
-cat
-try
 toy
 get
 gel

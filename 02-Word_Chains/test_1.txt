@@ -4,6 +4,8 @@ cat dog 3
 emu kea
 flu covid
 car cat
+beat meer
+beat meer 6
 
 cat
 cup
@@ -11,3 +13,10 @@ dog
 cap
 cut
 elephant
+beat
+heat
+heet
+heer
+meer
+reer
+mear
