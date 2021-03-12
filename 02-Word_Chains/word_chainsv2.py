@@ -38,6 +38,7 @@ graph = defaultdict(list) # Create a graph
 def addEdge(graph, u, v):
     graph[u].append(v)
 
+
 # Finds all paths between start and end vortices, storing in an array paths = [path1, path2, ...] where path1 = [start, node1, ..., end] etc
 def find_all_paths(graph, start, end, path =[]): 
     path = path + [start] 

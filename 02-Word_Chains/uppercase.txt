@@ -1,0 +1,8 @@
+cat CAP
+cat cap
+cAt CaP 5
+
+CAT
+cat
+CAP
+cAp

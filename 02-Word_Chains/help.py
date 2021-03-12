@@ -1,2 +1,5 @@
 import sys
-print(sys.version)
+
+A = ['a', 'b', 'c']
+
+A['c']
