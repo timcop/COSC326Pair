@@ -68,8 +68,6 @@ def BFS(graph, start, end, length):
                 if length == 0 or length == len(path):
                     return path
             
-   
-
         # For all adjacent vortices to our current vertex, if it's not in the current path
         # then append to current path and add to queue
         for curr_adj in graph[vertex]:
