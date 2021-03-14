@@ -1,5 +1,7 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 import sys
+from time import time
+
 
 problems = [] # Problems array, store tuples (word1, word2, path) where path = 0 means no path specified
 words_arr = [] # Array of words to be used for chains
@@ -18,14 +20,17 @@ for line in sys.stdin:
 
         # Valid input is either "word1 word2" or "word1 word2 int"
         if ((len(split) != 2) and (len(split) != 3)): 
-            print("Invalid input: ", line)
+            line = "Invalid input: " + line
+            
+            problems.append(line.strip())
         elif len(split) == 3:
             try:
                 length = int(split[2])
                 prob = (split[0], split[1], length)
                 problems.append(prob)
             except:
-                print("Invalid input: ", line)
+                line = "Invalid input: " + line
+                problems.append(line.strip())
         elif len(split) == 2:
             prob = (split[0], split[1], 0)
             problems.append(prob)
@@ -36,12 +41,12 @@ for line in sys.stdin:
             word = split[0]
             try:
                 length = int(word)
-                print("Invalid input: ", line)
+                line = "Invalid input: " + line
+                problems.append(line.strip())
             except:
                 # Don't want duplicates
                 if word not in words_arr:
                     words_arr.append(split[0])
-
 
 ## Now construct graph of dictionary words
 graph = defaultdict(list)
@@ -55,7 +60,6 @@ def addEdge(graph, u, v):
 def BFS(graph, start, end, length):
     # If length = 0, we want shortest path (i.e first path found)
     # If length != 0, we want the first path found of the given length
-    paths = []
     queue= [[start]]
     
     while queue:
@@ -64,9 +68,8 @@ def BFS(graph, start, end, length):
 
         # Path found
         if vertex == end:
-            if path not in paths:
-                if length == 0 or length == len(path):
-                    return path
+            if length == 0 or length == len(path):
+                return path
             
         # For all adjacent vortices to our current vertex, if it's not in the current path
         # then append to current path and add to queue
@@ -76,7 +79,24 @@ def BFS(graph, start, end, length):
                 new_path.append(curr_adj)
                 queue.append(new_path)
 
-    
+
+def BFS2(graph, start, end, length):
+    queue = deque([[start]])
+
+    while queue:
+        path = queue.popleft()
+        vertex = path[-1]
+
+        if vertex == end:
+            if length == 0 or length == len(path):
+                return path
+
+        for curr_adj in graph[vertex]:
+            if curr_adj not in path:
+                new_path = list(path)
+                new_path.append(curr_adj)
+                queue.append(new_path)
+
 # Create edges between word vortices. We count how many characters two nodes have in common,
 # if the count is equal to length(word) - 1 then we know they differ by one character and 
 # thus we create and edge joining them.
@@ -89,19 +109,25 @@ for i, v in enumerate(words_arr):
             for k in range(len(u)):
                 if v[k] == u[k]:
                     count += 1
-                
             if count == v_length-1:
                 addEdge(graph, v, u)
 
 # For each of the problems, print the path if found, if not we print the problem saying it's impossible
+#t0 = time()
 for prob in problems:
-    path = BFS(graph, prob[0], prob[1], prob[2])
-    if path != None:
-        for node in path:
-            print(node, end = ' ')
-        print()
+    if isinstance(prob, str):
+        print(prob)
     else:
-        if prob[2] == 0:
-            print(prob[0] + " " + prob[1] + " " + "impossible")
+        path = BFS2(graph, prob[0], prob[1], prob[2])
+        if path != None:
+            for node in path:
+                print(node, end = ' ')
+            print()
         else:
-            print(prob[0] + " " + prob[1] + " " + str(prob[2]) + " " + "impossible")
+            if prob[2] == 0:
+                print(prob[0] + " " + prob[1] + " " + "impossible")
+            else:
+                print(prob[0] + " " + prob[1] + " " + str(prob[2]) + " " + "impossible")
+
+#t1 = time()
+#print(t1-t0)
