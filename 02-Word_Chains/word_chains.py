@@ -21,13 +21,16 @@ for line in sys.stdin:
         # Valid input is either "word1 word2" or "word1 word2 int"
         if ((len(split) != 2) and (len(split) != 3)): 
             line = "Invalid input: " + line
-            
             problems.append(line.strip())
         elif len(split) == 3:
             try:
                 length = int(split[2])
-                prob = (split[0], split[1], length)
-                problems.append(prob)
+                if length > 0:
+                    prob = (split[0], split[1], length)
+                    problems.append(prob)
+                else:
+                    line = "Invalid input: " + line
+                    problems.append(line.strip())
             except:
                 line = "Invalid input: " + line
                 problems.append(line.strip())
