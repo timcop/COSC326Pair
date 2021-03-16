@@ -60,30 +60,32 @@ def addEdge(graph, u, v):
 
 # A BFS graph search method which returns the shortest path from start to end if length = 0,
 # or returns a path of the specified length (length != 0)
-def BFS(graph, start, end, length):
+def BFS_shortest(graph, start, end):
     # If length = 0, we want shortest path (i.e first path found)
     # If length != 0, we want the first path found of the given length
-    queue= [[start]]
+    if start == end:
+        return [start, end]
+    queue = deque([[start]])
+    visited = set()
     
     while queue:
-        path = queue.pop(0) # Current path at start of queue
-        vertex = path[-1] # Last vertex in the path
-
-        # Path found
-        if vertex == end:
-            if length == 0 or length == len(path):
-                return path
+        path = queue.popleft()
+        vertex = path[-1]
             
         # For all adjacent vortices to our current vertex, if it's not in the current path
         # then append to current path and add to queue
         for curr_adj in graph[vertex]:
-            if curr_adj not in path:
+            if curr_adj not in visited:
+                if curr_adj == end:
+                    path.append(curr_adj)
+                    return path
+                
                 new_path = list(path)
                 new_path.append(curr_adj)
                 queue.append(new_path)
+        visited.add(vertex)
 
-
-def BFS2(graph, start, end, length):
+def BFS_length(graph, start, end, length):
     queue = deque([[start]])
 
     while queue:
@@ -121,7 +123,11 @@ for prob in problems:
     if isinstance(prob, str):
         print(prob)
     else:
-        path = BFS2(graph, prob[0], prob[1], prob[2])
+        if prob[2] == 0:
+            path = BFS_shortest(graph, prob[0], prob[1])
+        else:
+            path = BFS_length(graph, prob[0], prob[1], prob[2])
+        
         if path != None:
             for node in path:
                 print(node, end = ' ')
