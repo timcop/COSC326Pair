@@ -15,7 +15,7 @@ Strategies for directing the elevator such that the waiting and travel times for
 - 10 seconds for doors to open and close
 
 ### Helpful Links
-__I'm currently reading through these, so some may or may not be relevant__
+*I'm currently reading through these, so some may or may not be relevant*
 - https://www.geeksforgeeks.org/schedule-elevator-to-reduce-the-total-time-taken/
 - https://whyy.org/segments/science-of-waiting-elevators/
 - https://www.diva-portal.org/smash/get/diva2:811136/FULLTEXT01.pdf
