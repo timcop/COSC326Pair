@@ -20,3 +20,5 @@ heer
 meer
 reer
 mear
+cat
+cup

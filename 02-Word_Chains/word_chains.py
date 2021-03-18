@@ -4,7 +4,7 @@ from time import time
 
 
 problems = [] # Problems array, store tuples (word1, word2, path) where path = 0 means no path specified
-words_arr = [] # Array of words to be used for chains
+words_set = set() # Set of words to be used for chains
 
 blank_count = 0 # Keep track of the white space break for dictionary words
 
@@ -48,8 +48,8 @@ for line in sys.stdin:
                 problems.append(line.strip())
             except:
                 # Don't want duplicates
-                if word not in words_arr:
-                    words_arr.append(split[0])
+                if word not in words_set:
+                    words_set.add(split[0])
 
 ## Now construct graph of dictionary words
 graph = defaultdict(list)
@@ -58,11 +58,9 @@ graph = defaultdict(list)
 def addEdge(graph, u, v):
     graph[u].append(v)
 
-# A BFS graph search method which returns the shortest path from start to end if length = 0,
-# or returns a path of the specified length (length != 0)
+# A BFS graph search method which returns the shortest path from start to end.
 def BFS_shortest(graph, start, end):
-    # If length = 0, we want shortest path (i.e first path found)
-    # If length != 0, we want the first path found of the given length
+
     if start == end:
         return [start, end]
     queue = deque([[start]])
@@ -72,8 +70,8 @@ def BFS_shortest(graph, start, end):
         path = queue.popleft()
         vertex = path[-1]
             
-        # For all adjacent vortices to our current vertex, if it's not in the current path
-        # then append to current path and add to queue
+        # For all adjacent vortices to our current vertex, if it hasn't been visited
+        # then make a new path appending the adj vertex and add it to the queue
         for curr_adj in graph[vertex]:
             if curr_adj not in visited:
                 if curr_adj == end:
@@ -84,41 +82,51 @@ def BFS_shortest(graph, start, end):
                 new_path.append(curr_adj)
                 queue.append(new_path)
         visited.add(vertex)
+    return None
 
-def BFS_length(graph, start, end, length):
-    queue = deque([[start]])
+## DEPTH 
+def DFS_length(graph, start, end, length):
+    
+    stack = deque([[start]])
 
-    while queue:
-        path = queue.popleft()
-        vertex = path[-1]
+    while stack:
+        path = stack.pop()
+        # When paths are longer than the desired length we get rid of them
+        if len(path) <= length:
+            vertex = path[-1]
 
-        if vertex == end:
-            if length == 0 or length == len(path):
-                return path
+            if vertex == end:
+                if length == len(path):
+                    return path
 
-        for curr_adj in graph[vertex]:
-            if curr_adj not in path:
-                new_path = list(path)
-                new_path.append(curr_adj)
-                queue.append(new_path)
+            for curr_adj in graph[vertex]:
+                # Make sure it's not in the current path, we don't want cycles.
+                if curr_adj not in path:
+                    new_path = list(path)
+                    new_path.append(curr_adj)
+                    stack.append(new_path)
+    return None
 
-# Create edges between word vortices. We count how many characters two nodes have in common,
-# if the count is equal to length(word) - 1 then we know they differ by one character and 
-# thus we create and edge joining them.
-for i, v in enumerate(words_arr):
-    v_length = len(v)
-    for j, u in enumerate(words_arr):
-        u_length = len(u)
-        if v_length == u_length:
-            count = 0
-            for k in range(len(u)):
-                if v[k] == u[k]:
-                    count += 1
-            if count == v_length-1:
-                addEdge(graph, v, u)
+# Loop through the word set, compute possible word chain words and see if they're in the word set. 
+# If they are, we create edges in the graph. 
+while words_set:
+    word = words_set.pop()    #ASCII a = 97, z = 122
+    new_word = list(word)
+    for i, letter in enumerate(new_word):
+        #ASCII a = 97, z = 122
+        for j in range(97, 123):
+            new_letter = chr(j)
+            if new_letter != letter:
+                new_word[i] = new_letter
+                new_word = ''.join(new_word)
+                if new_word in words_set:
+                    addEdge(graph, word, new_word)
+                    addEdge(graph,new_word, word)
+            new_word = list(word)
+
+
 
 # For each of the problems, print the path if found, if not we print the problem saying it's impossible
-#t0 = time()
 for prob in problems:
     if isinstance(prob, str):
         print(prob)
@@ -126,7 +134,7 @@ for prob in problems:
         if prob[2] == 0:
             path = BFS_shortest(graph, prob[0], prob[1])
         else:
-            path = BFS_length(graph, prob[0], prob[1], prob[2])
+            path = DFS_length(graph, prob[0], prob[1], prob[2])
         
         if path != None:
             for node in path:
@@ -137,6 +145,3 @@ for prob in problems:
                 print(prob[0] + " " + prob[1] + " " + "impossible")
             else:
                 print(prob[0] + " " + prob[1] + " " + str(prob[2]) + " " + "impossible")
-
-#t1 = time()
-#print(t1-t0)
