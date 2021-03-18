@@ -27,4 +27,9 @@ Strategies for directing the elevator such that the waiting and travel times for
 - https://abhayavachat.blogspot.com/2016/04/elevator-algorithm-perfect-interview.html
 
 ### Ideas
-- 
+- `floors` = an array of passengers corresponding to their desired floor number
+- `time` = time taken for passenger to reach destination
+- Create a simulation with a timer
+
+**Strategy 1**: Sort `floors` in descending order and arrange in groups of 4
+**Strategy 2**: Same as above but sort `floors` in ascending order instead
