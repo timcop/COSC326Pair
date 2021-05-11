@@ -29,6 +29,7 @@ Strategies for directing the elevator such that the waiting and travel times for
 - Simulation https://github.com/magwo/elevatorsaga
 - https://stackoverflow.com/questions/493276/modelling-an-elevator-using-object-oriented-analysis-and-design
 - __https://www.angelfire.com/trek/software/elevator.html__
+- https://youtu.be/DhB8la7kGxc
 
 ### Strategies
 **UPDATE**
