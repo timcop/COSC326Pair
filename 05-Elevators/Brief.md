@@ -31,6 +31,9 @@ Strategies for directing the elevator such that the waiting and travel times for
 - __https://www.angelfire.com/trek/software/elevator.html__
 
 ### Strategies
+**UPDATE**
+Actually I'm going to try process scheduling methods now
+
 **Collective Control Elevator Algorithm**
 1. As long as there’s someone inside or ahead of the elevator who wants to go in the current direction, keep heading in that direction.
 2. Once the elevator has exhausted the requests in its current direction, switch directions if there’s a request in the other direction.  Otherwise, stop and wait for a call.
