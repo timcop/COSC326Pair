@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Math;
 
+/**
+ * An abstract class for the strategy 
+ */
 public abstract class Strategy {
 
     public Elevator problem;
@@ -15,7 +19,7 @@ public abstract class Strategy {
 class FIFS extends Strategy {
 
     public static void insertionSortArrayList(ArrayList<Customer> list) {
-        for int (i = 1; i < list.length(); i++) {
+        for (int i = 1; i < list.length(); i++) {
             Customer current = list.get(i);
             current_val = current.start_time;
             int j = i-1;
