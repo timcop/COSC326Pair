@@ -4,19 +4,7 @@ import java.lang.Math;
 
 class FIFS extends Strategy {
     public List<Customer> finished = new ArrayList<Customer>();
-    // public void insertionSortArrayList(List<Customer> list) {
-    //     for (int i = 1; i < list.size(); i++) {
-    //         Customer current = list.get(i);
-    //         int current_val = current.getStart_time();
-    //         int j = i-1;
-    //         while (i > -1 && list.get(j).getStart_time() > current_val) {
-    //             list.set(i+1, list.get(i));
-    //             i--;
-    //         }
-    //         list.set(i+1, current);
-    //     }
-    //     problem.customers = list;
-    // }
+
 
     public void runSimulation(Elevator e) {
         List<Customer> customers = e.customers;
@@ -29,6 +17,11 @@ class FIFS extends Strategy {
         while (customers.size() > 0) {
             Customer current = customers.get(0);
             customers.remove(0);
+
+            // Wait until button is pressed by customer
+            if (time < current.getStart_time()) {
+                time = current.getStart_time();
+            }
 
             time += Math.abs(current_floor - current.getFloor_start()) * e.floor_time; //Travel to customers floor, note if it's the same then nothing added
             current_floor = current.getFloor_start();
@@ -47,20 +40,6 @@ class FIFS extends Strategy {
             current.setWait(wait);
             finished.add(current);
         }
-        // Total wait time of each customer can be found by doing customer.finish_time - customer.start_time
-        // Total wait time of problem is what time is at the end
-        System.out.println("|  ID  |  Arrival  |  Completed  |  Turnover  |  Burst  |  Wait  |");
-        System.out.println("------------------------------------------------------------------");
-        finished.sort(Comparator.comparing(Customer::getId));
-        for (Customer c : finished) {
-            System.out.print("| " + c.getId() + " ");
-            System.out.print("| " + c.getStart_time() + " ");
-            System.out.print("| " + c.getFinish_time() + " ");
-            System.out.print("| " + c.getTurnover() + " ");
-            System.out.print("| " + c.getBurst() + " ");
-            System.out.println("| " + c.getWait() + " |");
-
-            // System.out.println(c.getId() + " " + c.getStart_time() + " " + c.getFinish_time() + " " + c.getTurnover() + " " + c.getBurst() + " " + c.getWait());
-        }
+        printSimulation(finished);
     }
 }
