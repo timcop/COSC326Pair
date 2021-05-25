@@ -3,7 +3,7 @@ import java.util.Random;
 import java.lang.Math;
 
 /**
- * An abstract class for the strategy 
+ * An abstract class for the strategy
  */
 public abstract class Strategy {
 

@@ -4,7 +4,7 @@ import java.lang.Math;
 
 /**
  * Creates a class for the elevator with customers
- * 
+ *
  * @author Tim Copland
  * @author Magdeline Huang
  */
@@ -18,8 +18,8 @@ public class Elevator {
     /**
      * Constructor for the Elevator class
      * ATTN: What do these parameters mean?
-     * @param N
-     * @param final_time
+     * @param N number of customers
+     * @param final_time time ranges from 0 - final time
      */
     public Elevator(int N, int final_time) {
         setCustomers(N, final_time);
@@ -38,7 +38,7 @@ public class Elevator {
             int rand_floor_start = random.nextInt(floor_count); /* Starts the customer at a random floor */
             int rand_floor_finish = random.nextInt(floor_count); /* Sets a desired target floor for the customer */
 
-            /* ATTN: What is this loop doing? */
+            /* This just makes sure the destination floor doesnt equal the starting floor for a customer */
             while (rand_floor_finish == rand_floor_start) {
                 rand_floor_finish = random.nextInt(floor_count);
             }
