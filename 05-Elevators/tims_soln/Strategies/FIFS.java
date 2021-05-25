@@ -5,7 +5,6 @@ import java.lang.Math;
 class FIFS extends Strategy {
     public List<Customer> finished = new ArrayList<Customer>();
 
-
     public void runSimulation(Elevator e) {
         List<Customer> customers = e.customers;
         int time = 0;
