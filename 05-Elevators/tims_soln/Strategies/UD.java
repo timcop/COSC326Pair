@@ -64,6 +64,7 @@ class UD extends Strategy {
         printSimulation(finished);
     }
 
+    // Check to see if customers are waiting at a floor we're at
     public List<Customer> customersAtFloor(List<Customer> customers, int current_floor, int time) {
         List<Customer> customers_floor = new ArrayList<Customer>();
         for (Customer c : customers) {
@@ -74,6 +75,7 @@ class UD extends Strategy {
         return customers_floor;
     }
 
+    // Check to see if we've hit a floor that our customers already in the elevator are waiting to exit at. 
     public List<Customer> customersExitFloor(List<Customer> customers, int current_floor) {
         List<Customer> exit_customers = new ArrayList<Customer>();
         for (Customer c : customers) {
