@@ -1,8 +1,12 @@
+package elevator;
+import java.util.*;
+
+
 /**
  * Creates a class for a customer to record the time they started waiting,
- * the time they finished their journey, the floor they started on, and 
+ * the time they finished their journey, the floor they started on, and
  * the floor they finished on.
- * 
+ *
  * @author Tim Copland
  * @author Magdeline Huang
  */
@@ -13,6 +17,10 @@ public class Customer {
     private int floor_start;
     private int floor_finish;
     private int finish_time;
+    private int id;
+    private int turnover;
+    private int burst;
+    private int wait;
     /* ATTN: Perhaps we should also include customer wait time and customer travel time */
 
     /**
@@ -21,10 +29,11 @@ public class Customer {
      * @param start The floor the customer started on
      * @param finish The floor the customer finished on
      */
-    public Customer(int time, int start, int finish) {
+    public Customer(int time, int start, int finish, int id) {
         this.start_time = time;
         this.floor_start = start;
         this.floor_finish = finish;
+        this.id = id;
     }
 
     /**
@@ -57,5 +66,37 @@ public class Customer {
      */
     public int getFloor_finish() {
         return floor_finish;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getTurnover() {
+        return turnover;
+    }
+
+    public int getBurst() {
+        return burst;
+    }
+
+    public int getWait() {
+        return wait;
+    }
+
+    public void setTurnover(int turnover) {
+        this.turnover = turnover;
+    }
+
+    public void setBurst(int burst) {
+        this.burst = burst;
+    }
+
+    public void setWait(int wait) {
+        this.wait = wait;
+    }
+
+    public void setFinish_time(int finish) {
+        this.finish_time = finish;
     }
 }
