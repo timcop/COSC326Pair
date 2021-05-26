@@ -18,10 +18,9 @@ public class Customer {
     private int floor_finish;
     private int finish_time;
     private int id;
-    private int turnover;
-    private int burst;
-    private int wait;
-    /* ATTN: Perhaps we should also include customer wait time and customer travel time */
+    private int turnover; /*completed - arrival */
+    private int burst; /* how long the process should take ideally */
+    private int wait; /* turnover - burst */
 
     /**
      * Constructer for the Customer class
