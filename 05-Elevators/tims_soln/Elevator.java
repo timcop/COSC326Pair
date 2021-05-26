@@ -14,6 +14,7 @@ public class Elevator {
     public final static int floor_count = 10; /* The total number of floors in the elevator */
     public final static int floor_time = 5; /* The time it takes to travel from one floor to the next */
     public final static int door_time = 10; /* The time it takes for a door to open and close */
+    public final static int max_capacity = 4;
 
     /**
      * Constructor for the Elevator class

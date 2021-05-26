@@ -31,6 +31,5 @@ public abstract class Strategy {
 
         System.out.println("Average wait: " +  average_wait);
         System.out.println("Average turnover: " +  average_turnover);
-
     }
 }

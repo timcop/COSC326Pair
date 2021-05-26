@@ -1,6 +1,7 @@
 package elevator;
 import java.util.*;
 import java.lang.Math;
+// TO:DO ACCOUNT FOR MAX CAPACITY
 
 class UD extends Strategy {
     public List<Customer> finished = new ArrayList<Customer>();
@@ -51,6 +52,8 @@ class UD extends Strategy {
                 }
                 ready_customers.clear();
             }
+
+
             current_floor += direction;
             time += e.floor_time;
             if (current_floor == e.floor_count - 1) {
@@ -75,7 +78,7 @@ class UD extends Strategy {
         return customers_floor;
     }
 
-    // Check to see if we've hit a floor that our customers already in the elevator are waiting to exit at. 
+    // Check to see if we've hit a floor that our customers already in the elevator are waiting to exit at.
     public List<Customer> customersExitFloor(List<Customer> customers, int current_floor) {
         List<Customer> exit_customers = new ArrayList<Customer>();
         for (Customer c : customers) {
