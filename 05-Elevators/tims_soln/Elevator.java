@@ -18,9 +18,8 @@ public class Elevator {
 
     /**
      * Constructor for the Elevator class
-     * ATTN: What do these parameters mean?
-     * @param N number of customers
-     * @param final_time time ranges from 0 - final time (gives you bounds for the arrival time)
+     * @param N Number of customers
+     * @param final_time Time ranges from 0 - final time (gives you bounds for the arrival time)
      */
     public Elevator(int N, int final_time) {
         setCustomers(N, final_time);
@@ -28,7 +27,6 @@ public class Elevator {
 
     /**
      * Sets the customers in the elevator
-     * ATTN: What do these parameters mean?
      * @param N
      * @param final_time
      */

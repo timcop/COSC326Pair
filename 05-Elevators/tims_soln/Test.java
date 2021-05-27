@@ -9,9 +9,12 @@ public class Test {
         // customers
         Elevator e1 = new Elevator(10, 100);
         Elevator e2 = new Elevator(10, 100);
+        Elevator e3 = new Elevator(10, 100);
         FIFS fifs = new FIFS();
         UD ud = new UD();
+        SJF sjf = new SFJ();
         fifs.runSimulation(e1);
         ud.runSimulation(e2);
+        sjf.runSimulation(e3);
     }
 }
