@@ -56,9 +56,11 @@ class SJF2 extends Strategy {
                         }
 
                         //Load in customers
-                        for (Customer c : ready_customers) {
+                        while (customers_in.size() != 4 && ready_customers.size() > 0) {
+                            Customer c = ready_customers.get(0);
                             customers_in.add(c);
                             customers_out.remove(c);
+                            ready_customers.remove(c);                    
                         }
                         ready_customers.clear();
                     }
@@ -103,6 +105,7 @@ class SJF2 extends Strategy {
                 customers_floor.add(c);
             }
         }
+        customers_floor.sort(Comparator.comparing(Customer::getStart_time));
         return customers_floor;
     }
 

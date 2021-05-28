@@ -45,10 +45,13 @@ class UD extends Strategy {
                 if (!opened_doors) {
                     time += e.door_time;
                 }
+
                 //Load in customers
-                for (Customer c : ready_customers) {
+                while (customers_in.size() != 4 && ready_customers.size() > 0) {
+                    Customer c = ready_customers.get(0);
                     customers_in.add(c);
                     customers.remove(c);
+                    ready_customers.remove(c);                    
                 }
                 ready_customers.clear();
             }
