@@ -76,7 +76,7 @@ class SJF extends Strategy {
 
             }
         }
-        
+
         printSimulation(finished);
     }
 

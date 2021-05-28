@@ -49,7 +49,7 @@ Actually I'm going to try process scheduling methods now
 - There is a possibility that requests keep coming from a region of nearby floors, and the elevator doesn’t get a chance to serve older requests from floors that are far away. This can lead to starvation for some requests, as there is no upper bound on the wait time.
 - Note that a slightly more complex structure than a queue, would be needed to store the requests, so that they can be searched quickly to find out the next best request. That would be another side question.
 
+
 **SCAN**
 
 **LOOK**
-

@@ -12,9 +12,9 @@ public class Test {
         Elevator e3 = new Elevator(10, 100);
         FIFS fifs = new FIFS();
         UD ud = new UD();
-        SJF sjf = new SFJ();
+        SJF2 sjf2 = new SJF2();
         fifs.runSimulation(e1);
         ud.runSimulation(e2);
-        sjf.runSimulation(e3);
+        sjf2.runSimulation(e3);
     }
 }
