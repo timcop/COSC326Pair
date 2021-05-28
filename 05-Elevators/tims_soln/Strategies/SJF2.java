@@ -22,6 +22,9 @@ class SJF2 extends Strategy {
                 customers_in.sort(Comparator.comparing(Customer::getBurst));
                 Customer job = customers_in.get(0);
                 int destination_floor = job.getFloor_finish();
+                if (destination_floor == current_floor) {
+                    /// this might be the reason
+                }
                 while (destination_floor != current_floor) {
                     int direction = (destination_floor - current_floor)/Math.abs(current_floor-destination_floor);
                     current_floor += direction;
@@ -51,16 +54,16 @@ class SJF2 extends Strategy {
 
                     if (ready_customers.size() != 0) {
                         //increment time by door if they havent been opened already
-                        if (!opened_doors) {
+                        if (!opened_doors && customers_in.size() != 4) {
                             time += e.door_time;
                         }
 
                         //Load in customers
-                        while (customers_in.size() != 4 && ready_customers.size() > 0) {
+                        while (customers_in.size() != 4) {
                             Customer c = ready_customers.get(0);
                             customers_in.add(c);
                             customers_out.remove(c);
-                            ready_customers.remove(c);                    
+                            ready_customers.remove(c);
                         }
                         ready_customers.clear();
                     }
@@ -95,6 +98,7 @@ class SJF2 extends Strategy {
             }
         }
         printSimulation(finished);
+        e.customers = finished;
     }
 
     // Check to see if customers are waiting at a floor we're at

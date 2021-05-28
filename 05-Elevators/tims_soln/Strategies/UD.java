@@ -51,7 +51,7 @@ class UD extends Strategy {
                     Customer c = ready_customers.get(0);
                     customers_in.add(c);
                     customers.remove(c);
-                    ready_customers.remove(c);                    
+                    ready_customers.remove(c);
                 }
                 ready_customers.clear();
             }
@@ -68,6 +68,7 @@ class UD extends Strategy {
             }
         }
         printSimulation(finished);
+        e.customers = finished;
     }
 
     // Check to see if customers are waiting at a floor we're at

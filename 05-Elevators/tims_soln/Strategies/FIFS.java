@@ -2,7 +2,7 @@ package elevator;
 import java.util.*;
 import java.lang.Math;
 
-// First in first served 
+// First in first served
 class FIFS extends Strategy {
     public List<Customer> finished = new ArrayList<Customer>();
 
@@ -41,5 +41,6 @@ class FIFS extends Strategy {
             finished.add(current);
         }
         printSimulation(finished);
+        e.customers = finished;
     }
 }

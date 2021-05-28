@@ -7,14 +7,16 @@ public class Test {
 
         // TO DO: Make it so we can test different strats on the same
         // customers
-        Elevator e1 = new Elevator(10, 100);
-        Elevator e2 = new Elevator(10, 100);
-        Elevator e3 = new Elevator(10, 100);
+        int minute = 60;
+        int hour = 3600;
+        Elevator e = new Elevator(50, hour);
+        Elevator e3 = new Elevator(50, hour);
+
         FIFS fifs = new FIFS();
         UD ud = new UD();
         SJF2 sjf2 = new SJF2();
-        fifs.runSimulation(e1);
-        ud.runSimulation(e2);
-        sjf2.runSimulation(e3);
+        fifs.runSimulation(e);
+        ud.runSimulation(e);
+        sjf2.runSimulation(e);
     }
 }
