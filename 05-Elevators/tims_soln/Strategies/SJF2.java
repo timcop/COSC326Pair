@@ -59,7 +59,7 @@ class SJF2 extends Strategy {
                         }
 
                         //Load in customers
-                        while (customers_in.size() != 4) {
+                        while (customers_in.size() != 4 && ready_customers.size() != 0) {
                             Customer c = ready_customers.get(0);
                             customers_in.add(c);
                             customers_out.remove(c);
