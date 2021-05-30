@@ -5,6 +5,8 @@ import java.lang.Math;
 // First in first served
 class FIFS extends Strategy {
     public List<Customer> finished = new ArrayList<Customer>();
+    public double average_wait;
+    public double average_turnover;
 
     public void runSimulation(Elevator e) {
         List<Customer> customers = e.customers;
@@ -32,7 +34,7 @@ class FIFS extends Strategy {
             time+= e.door_time; //Open and close the door
 
             int turnover = time - current.getStart_time();
-            int burst = (2*e.door_time + Math.abs(current.getFloor_finish() - current.getFloor_start())*e.floor_time); //Burst time = 2*doortime + time to travel between floors
+            int burst = (e.door_time + Math.abs(current.getFloor_finish() - current.getFloor_start())*e.floor_time); //Burst time = 2*doortime + time to travel between floors
             int wait = turnover - burst;
             current.setFinish_time(time);
             current.setTurnover(turnover);
@@ -40,7 +42,11 @@ class FIFS extends Strategy {
             current.setWait(wait);
             finished.add(current);
         }
-        printSimulation(finished);
+        // printSimulation(finished);
+        // System.out.println("--- FIFS --- ");
+        // printData(finished);
+        average_wait = averageWait(finished);
+        average_turnover = averageTurnover(finished);
         e.customers = finished;
     }
 }

@@ -5,6 +5,8 @@ import java.lang.Math;
 
 class UD extends Strategy {
     public List<Customer> finished = new ArrayList<Customer>();
+    public double average_wait;
+    public double average_turnover;
 
     public void runSimulation(Elevator e) {
         List<Customer> customers = e.customers;
@@ -20,15 +22,14 @@ class UD extends Strategy {
             List<Customer> exit_customers = customersExitFloor(customers_in, current_floor);
 
             //Check for waiting customers at current floor
-            List<Customer> ready_customers = customersAtFloor(customers, current_floor, time);
             Boolean opened_doors = false;
             if (exit_customers.size() != 0) {
-                time += e.door_time;
+                time += e.door_time/2;
                 opened_doors = true;
                 for (Customer c : exit_customers) {
                     // Handle timing
                     int turnover = time - c.getStart_time();
-                    int burst = (2*e.door_time + Math.abs(current_floor - c.getFloor_start())*e.floor_time); //Burst time = 2*doortime + time to travel between floors
+                    int burst = (e.door_time + Math.abs(current_floor - c.getFloor_start())*e.floor_time); //Burst time = doortime + time to travel between floors
                     int wait = turnover - burst;
                     c.setFinish_time(time);
                     c.setTurnover(turnover);
@@ -39,11 +40,12 @@ class UD extends Strategy {
                 }
                 exit_customers.clear();
             }
-            if (ready_customers.size() != 0) {
+            List<Customer> ready_customers = customersAtFloor(customers, current_floor, time);
+            if (ready_customers.size() != 0 && customers_in.size() != 4) {
 
                 //incredment time by door if they havent been opened already
                 if (!opened_doors) {
-                    time += e.door_time;
+                    time += e.door_time/2; //open door
                 }
 
                 //Load in customers
@@ -55,7 +57,9 @@ class UD extends Strategy {
                 }
                 ready_customers.clear();
             }
-
+            if (opened_doors) {
+                time += e.door_time/2;
+            }
 
             current_floor += direction;
             time += e.floor_time;
@@ -67,7 +71,10 @@ class UD extends Strategy {
                 direction = 1;
             }
         }
-        printSimulation(finished);
+        // System.out.println("--- UD --- ");
+        // printData(finished);
+        average_wait = averageWait(finished);
+        average_turnover = averageTurnover(finished);
         e.customers = finished;
     }
 
