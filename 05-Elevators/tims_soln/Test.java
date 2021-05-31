@@ -19,7 +19,7 @@ public class Test {
         fifs.runSimulation(e);
         ud.runSimulation(e);
         sjf2.runSimulation(e);
-        var fileName = "data250/averages" + args[0] +".txt";
+        var fileName = "dataNEW50/averages" + args[0] +".txt";
         try (FileWriter f = new FileWriter(fileName, true);
                 BufferedWriter b = new BufferedWriter(f);
                 PrintWriter p = new PrintWriter(b);) {

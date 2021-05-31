@@ -19,12 +19,18 @@ class SJF2 extends Strategy {
 
         while (customers_out.size() > 0 || customers_in.size() > 0) { // While there are still customers outside or inside the lift
             if (customers_in.size() != 0){
-                customers_in.sort(Comparator.comparing(Customer::getBurst));
+                // customers_in.sort(Comparator.comparing(Customer::getFloor_finish));
                 Customer job = customers_in.get(0);
-                int destination_floor = job.getFloor_finish();
-                if (destination_floor == current_floor) {
-                    /// this might be the reason
+                int low_dist = Math.abs(current_floor - job.getFloor_finish());
+                for (Customer c : customers_in) {
+                    int dist = Math.abs(current_floor - c.getFloor_finish());
+                    if (dist < low_dist) {
+                        low_dist = dist;
+                        job = c;
+                    }
                 }
+                // Customer job = customers_in.get(0);
+                int destination_floor = job.getFloor_finish();
                 while (destination_floor != current_floor) {
                     int direction = (destination_floor - current_floor)/Math.abs(current_floor-destination_floor);
                     current_floor += direction;
